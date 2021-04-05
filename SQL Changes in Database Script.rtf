@@ -1,0 +1,76 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Helvetica;}{\f1\fnil\fcharset0 HelveticaNeue;}{\f2\fnil Consolas;}{\f3\fnil\fcharset0 Consolas;}{\f4\fnil\fcharset0 Menlo-Regular;}}
+{\colortbl ;\red0\green0\blue255;\red220\green161\blue13;\red204\green204\blue204;\red102\green102\blue102;\red128\green128\blue128;\red0\green0\blue0;\red255\green0\blue0;\red255\green0\blue255;\red0\green128\blue0;\red251\green0\blue7;\red13\green98\blue1;\red251\green0\blue255;\red0\green255\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\cf1\f0\fs19\lang9 SQL Changes in Database Script\par
+
+\pard\cf0\f1\fs24     For UAT1: {{\field{\*\fldinst{HYPERLINK "http://nonprod-staging-resource-vm0.southeastasia.cloudapp.azure.com"}}{\fldrslt{\ul\cf1\cf2\ul nonprod-staging-resource-vm0.southeastasia.cloudapp.azure.com}}}}\f1\fs24  \par
+            For UAT2: {{\field{\*\fldinst{HYPERLINK "http://nonprod-2-resource-vm.southeastasia.cloudapp.azure.com"}}{\fldrslt{\ul\cf1\cf2\ul nonprod-2-resource-vm.southeastasia.cloudapp.azure.com}}}}\f1\fs24  \par
+\~\~\~\~\~\~\~\~\~\~\~\~For UAT3: {{\field{\*\fldinst{HYPERLINK "http://nonprod-3-resource-vm0.southeastasia.cloudapp.azure.com"}}{\fldrslt{\ul\cf1\cf2\ul nonprod-3-resource-vm0.southeastasia.cloudapp.azure.com}}}}\f1\fs24   \par
+            For UAT4: {{\field{\*\fldinst{HYPERLINK "http://nonprod-4-resource-vm0.southeastasia.cloudapp.azure.com"}}{\fldrslt{\ul\cf1\cf2\ul nonprod-4-resource-vm0.southeastasia.cloudapp.azure.com}}}}\f1\fs24  \par
+            For UAT5: {{\field{\*\fldinst{HYPERLINK "http://nonprod-consumerlending-0.southeastasia.cloudapp.azure.com"}}{\fldrslt{\ul\cf1\cf2\ul nonprod-consumerlending-0.southeastasia.cloudapp.azure.com}}}}\f1\fs24\par
+
+\pard\sa200\sl276\slmult1\cf1\f0\fs19\par
+\cf3 - \cf4 to alter data type\cf1\par
+Alter\cf0  \cf1 table\cf0  [cdm]\cf5 .\cf0 [CARD_PROCESSOR_TRANSMITTAL] \cf1 alter\cf0  \cf1 column\cf0  [ADDRESS] \cf1 varchar\cf5 (\cf0 264\cf5 ); \par
+\par
+\cf1\f2 alter\cf6  \cf1 table\cf6  [opa]\cf5 .\cf6 [AUDIT_LOG] \cf1 add\cf6  \cf1 default\cf6  \cf7 'ACCEPTED'\cf6  \cf1 for\cf6  RESULT\cf5 ;\par
+\cf1\f3\lang1033 a\f2\lang9 lter\cf6  \cf1 table\cf6  [opa]\cf5 .\cf6 [AUDIT_LOG] \cf1 alter\cf6  \cf1 column\cf6  DETAILS [nvarchar]\cf5 (\cf6 4000\cf5 )\cf6  \cf5 NOT\cf6  \cf5 NULL;\cf6\par
+\cf1 go\cf6\par
+\cf1 alter\cf6  \cf1 table\cf6  [opa]\cf5 .\cf6 [AUDIT_LOG] \cf1 add\cf6  \cf1 default\cf6  \cf7 'Default details'\cf6  \cf1 for\cf6  DETAILS\cf5 ;\par
+\par
+\cf1 alter\cf6  \cf1 table\cf6  [sec]\cf5 .\cf6 [ACCESS_REQUESTS] \cf1 add\cf6\par
+[TYPE] [nvarchar]\cf5 (\cf6 20\cf5 )\cf6  \cf5 NOT\cf6  \cf5 NULL\cf6  \cf1 DEFAULT\cf6  \cf7 'REQUEST_ACCESS'\cf5\f0\par
+\par
+[ATTEMPT_ID] [bigint] NULL,\par
+- \cf4 to insert data \cf5\par
+\cf1 INSERT\cf0  [sdm]\cf5 .\cf0 [TRANSACTION_DETAIL_TYPE]\cf1  \cf5 (\cf0 [TRANSACTION_DETAIL_TYPE_CODE]\cf5 ,\cf0  [LANGUAGE_CODE]\cf5 ,\cf0  [TRANSACTION_DETAIL_TYPE_NM]\cf5 ,\cf0  [TRANSACTION_DETAIL_TYPE_DESC]\cf5 ,\cf0  [TRANSACTION_TYPE_CODE]\cf5 ,\cf0  [TRANSACTION_CHANNEL_CODE]\cf5 ,\cf0  [TRANSACTION_SCHEME_CODE]\cf5 ,\cf0  [SOURCE_ACCOUNT]\cf5 ,\cf0  [DESTINATION_ACCOUNT]\cf5 ,\cf0  [SOURCE_TRANSACTION_CODE]\cf5 ,\cf0  [DESTINATION_TRANSACTION_CODE]\cf5 ,\cf0  [LOCATION_CODE]\cf5 ,\cf0  [EFFECTIVE_DATE]\cf5 ,\cf0  [FCRM_TRANSACTION_CODE]\cf5 ,\cf0  [TRANSACTION_CHANNEL_TYPE]\cf5 ,\cf0  [UPDATED_DATETIME]\cf5 ,\cf0  [UPDATED_BY]\cf5 ,\cf0  [CREATED_DATETIME]\cf5 ,\cf0  [CREATED_BY]\cf5 )\cf0  \cf1 VALUES \cf5 (\cf7 N'POSINQEXPREVCRDT'\cf5 ,\cf0  \cf7 N'EN'\cf5 ,\cf0  \cf7 N'Manual Reversal of balance inquiry for Bancnet POS'\cf5 ,\cf0  \cf7 N'Manual Reversal of balance inquiry for Bancnet POS'\cf5 ,\cf0  \cf7 N'EXTERNAL'\cf5 ,\cf0  \cf7 N'SYSTEM'\cf5 ,\cf0  \cf7 N'POS'\cf5 ,\cf0  \cf7 N'A/P Bancnet'\cf5 ,\cf0  \cf7 N'Bancnet Fee - ATM'\cf5 ,\cf0  \cf7 N'APBNETPOSDR'\cf5 ,\cf0  \cf7 N'POSINQEXPREV'\cf5 ,\cf0  \cf7 N'PH'\cf5 ,\cf0  \cf8 GETUTCDATE\cf5 (),\cf0  \cf5 NULL,\cf0  \cf5 NULL,\cf0  \cf8 GETUTCDATE\cf5 (),\cf0  \cf8 SUSER_SNAME\cf5 (),\cf0  \cf8 GETUTCDATE\cf5 (),\cf0  \cf8 SUSER_SNAME\cf5 ())\par
+- to update data\par
+\cf8 UPDATE\cf0  sdm\cf5 .\cf0 TRANSACTION_DETAIL_TYPE \cf1 SET\cf0  TRANSACTION_SCHEME_CODE \cf5 =\cf0  \cf7 'BAL_INQ_FEE'\cf0  \cf1 WHERE\cf0  TRANSACTION_DETAIL_TYPE_CODE \cf5 IN\cf1  \cf5 (\cf7 'ATMINQFEEDBT'\cf5 ,\cf7 'ATMINQFEEINTLDBT'\cf5 )\par
+\par
+\cf1\f2 INSERT\cf6  \cf1 INTO\cf6  iam\cf5 .\cf6 FUNCTION_DEFINITION\cf1  \cf5 (\cf6 ASSETS_FUNCTION_CODE \cf5 ,\cf6  ASSETS_FUNCTION_CODE_DESCRIPTION \cf5 ,\cf6  PERMISSION_CODE \cf5 ,\cf6  CREATED_BY \cf5 ,\cf6  CREATED_DATETIME \cf5 ,\cf6  EFFECTIVE_START_DATE \cf5 ,\cf6  METHOD\cf5 ,\cf6  \cf1 PATH\cf6  \cf5 ,\cf6  \cf1 SERVICE_NAME\cf5 )\cf6   \cf1 VALUES \cf5 (\cf6  \cf7 'UAM_ARA'\cf6  \cf5 ,\cf6  \cf7 'User Access Management - Access Request Approval'\cf6  \cf5 ,\cf6  \cf7 'U'\cf6  \cf5 ,\cf6  \cf8 SUSER_SNAME\cf5 ()\cf6  \cf5 ,\cf6  \cf8 GETUTCDATE\cf5 ()\cf6  \cf5 ,\cf6  \cf8 GETUTCDATE\cf5 ()\cf6  \cf5 ,\cf6  \cf7 'PATCH'\cf5 ,\cf7 '/user-access-management/auth/access-requests/*'\cf5 ,\cf7 'useraccessmanagement'\cf5 );\cf6\par
+\par
+\cf1 INSERT\cf6  \cf1 INTO\cf6  iam\cf5 .\cf6 FUNCTION_DEFINITION\cf1  \cf5 (\cf6 ASSETS_FUNCTION_CODE \cf5 ,\cf6  ASSETS_FUNCTION_CODE_DESCRIPTION \cf5 ,\cf6  PERMISSION_CODE \cf5 ,\cf6  CREATED_BY \cf5 ,\cf6  CREATED_DATETIME \cf5 ,\cf6  EFFECTIVE_START_DATE \cf5 ,\cf6  METHOD\cf5 ,\cf6  \cf1 PATH\cf6  \cf5 ,\cf6  \cf1 SERVICE_NAME\cf5 )\cf6   \cf1 VALUES \cf5 (\cf6  \cf7 'UAM_ARQ'\cf6  \cf5 ,\cf6  \cf7 'User Access Management - Access Request Queue'\cf6  \cf5 ,\cf6  \cf7 'R'\cf6  \cf5 ,\cf6  \cf8 SUSER_SNAME\cf5 ()\cf6  \cf5 ,\cf6  \cf8 GETUTCDATE\cf5 ()\cf6  \cf5 ,\cf6  \cf8 GETUTCDATE\cf5 ()\cf6  \cf5 ,\cf6  \cf7 'GET'\cf5 ,\cf7 '/user-access-management/auth/access-requests'\cf5 ,\cf7 'useraccessmanagement'\cf5 );\cf6\par
+\par
+\cf1 INSERT\cf6  \cf1 INTO\cf6  iam\cf5 .\cf6 FUNCTION_DEFINITION\cf1  \cf5 (\cf6 ASSETS_FUNCTION_CODE \cf5 ,\cf6  ASSETS_FUNCTION_CODE_DESCRIPTION \cf5 ,\cf6  PERMISSION_CODE \cf5 ,\cf6  CREATED_BY \cf5 ,\cf6  CREATED_DATETIME \cf5 ,\cf6  EFFECTIVE_START_DATE \cf5 ,\cf6  METHOD\cf5 ,\cf6  \cf1 PATH\cf6  \cf5 ,\cf6  \cf1 SERVICE_NAME\cf5 )\cf6   \cf1 VALUES \cf5 (\cf6  \cf7 'UAM_RA'\cf6  \cf5 ,\cf6  \cf7 'User Access Management - Revoke Access'\cf6  \cf5 ,\cf6  \cf7 'U'\cf6  \cf5 ,\cf6  \cf8 SUSER_SNAME\cf5 ()\cf6  \cf5 ,\cf6  \cf8 GETUTCDATE\cf5 ()\cf6  \cf5 ,\cf6  \cf8 GETUTCDATE\cf5 ()\cf6  \cf5 ,\cf6  \cf7 'POST'\cf5 ,\cf7 '/user-access-management/auth/user/revoke'\cf5 ,\cf7 'useraccessmanagement'\cf5 );\cf6\par
+\cf9 /* END - UserAccessManagement */\cf5\f0\par
+\par
+add column\par
+\cf1\f2 alter\cf6  \cf1 table\cf6  [rtb]\cf5 .\cf6 [CROSS_PROD_TRANSFER_EXCEPTION] \cf1 add\cf6  ACTIVE \cf1 Varchar\cf5 (\cf6 1\cf5 )\cf6  \cf1 Default\cf5 (\cf7 'Y'\cf5 )\cf6  \cf5 NOT\cf6  \cf5 NULL\par
+\par
+\cf1 alter\cf6  \cf1 table\cf6  [opa].[AUDIT_LOG]\f3\lang1033  \cf1\f2\lang9 add\par
+[ADVICE_TYPE]\f3\lang1033  \f2\lang9 [NVARCHAR](100)\f3\lang1033  \f2\lang9 NOT NULL DEFAULT\f3\lang1033  \f2\lang9 ('AFTER_SUCCESS'),\par
+[UPDATED_BY] [NVARCHAR](150)\f3\lang1033  \f2\lang9 NULL,\par
+[UPDATED_DATETIME]\f3\lang1033  \f2\lang9 [DATETIME2] NULL,\par
+\par
+\par
+DESCRIPTION\f3\lang1033  \f2\lang9 NVARCHAR(100) NOT NULL DEFAULT 'Read' ,\par
+ASSETS_CODE\f3\lang1033  \f2\lang9 NVARCHAR(100) NOT NULL DEFAULT 'SB'\cf5\par
+[NET_HOST_STF] [VARCHAR](14) NULL,\par
+[CURRENT_BALANCE] [VARCHAR](17) NULL,\par
+[AVAILABLE_BALANCE] [VARCHAR](17) NULL\cf0\f0\par
+\par
+
+\pard\sl360\slmult0\cf1\f4\fs24 USE\cf6  [ONEPAM]\par
+\cf1 GO\cf6\par
+\par
+\cf1 INSERT\cf6  [rpt].[EXTRACT_FOR_DATALAKE_MAP] ([DATABASENAME], [TABLE_SCHEMA], [TABLE_NAME], [COLUMN_NAME], [DATA_TYPE], [ORDER_NBR], [UPDATED_DATETIME], [UPDATED_BY], [CREATED_DATETIME], [CREATED_BY]) \cf1 VALUES\cf6  (\cf10 N'ONEPAM'\cf6 , \cf10 N'rtb'\cf6 , \cf10 N'BATCH_FUND_TRANSFER'\cf6 , \cf10 N'ID'\cf6 , \cf10 N'bigint'\cf6 , \cf11 1\cf6 , \cf12 GETUTCDATE\cf6 (), \cf12 SUSER_NAME\cf6 (), \cf12 GETUTCDATE\cf6 (), \cf12 SUSER_NAME\cf6 ())\par
+\par
+\par
+sample for removing FK constraints\par
+\cf1\f2\fs19 IF\cf6  \cf5 EXISTS\cf1  \cf5 (\cf1 SELECT\cf6  \cf5 *\cf6\par
+  \cf1 FROM\cf6  \cf13 sys\cf5 .\cf13 foreign_keys\cf6\par
+  \cf1 WHERE\cf6  \cf1 name\cf6  \cf5 =\cf1  \cf5 (\cf7 N'FK_CREDIT_BUREAU_REQUESTS_RESPONSES_DUMP_CREDIT_INFO'\cf5 )\cf6\par
+  \cf5 OR\cf6  \cf8 object_id\cf6  \cf5 =\cf6  \cf8 OBJECT_ID\cf5 (\cf7 N'FK_CREDIT_BUREAU_REQUESTS_RESPONSES_DUMP_CREDIT_INFO'\cf5 )\cf6\par
+\cf5 )\cf6\par
+\cf1 ALTER\cf6  \cf1 TABLE\cf6  [lns]\cf5 .\cf6 [CREDIT_BUREAU_REQUESTS_RESPONSES_DUMP] \cf1 DROP\cf6  \cf1 CONSTRAINT\cf6  FK_CREDIT_BUREAU_REQUESTS_RESPONSES_DUMP_CREDIT_INFO\par
+\cf1 GO\par
+\f3\lang1033\par
+- to add constraints\f2\lang9\par
+ALTER\cf6  \cf1 TABLE\cf6  iam\cf5 .\cf6 USER_PROFILE\par
+\cf1 ADD\cf6  \cf1 CONSTRAINT\cf6  AK_USER_PROFILE \cf1 UNIQUE\cf6  \cf1 NONCLUSTERED \cf5 (\cf6 ACCESS_PROFILE_UUID\cf5 );\cf6\f4\fs24\par
+
+\pard\sa200\sl276\slmult1\cf0\f0\fs19\par
+\tab\par
+\cf5\par
+}
+ 
